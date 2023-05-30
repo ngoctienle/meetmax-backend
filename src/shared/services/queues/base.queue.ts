@@ -7,9 +7,9 @@ import Logger from 'bunyan'
 import { environment } from '@root/environment'
 
 import { IAuthJob } from '@authFeatures/interfaces/auth.interface'
-import { IUserJob } from '@userFeatures/interfaces/user.interface'
+import { IEmailJob, IUserJob } from '@userFeatures/interfaces/user.interface'
 
-type IBaseJobData = IAuthJob | IUserJob
+type IBaseJobData = IAuthJob | IUserJob | IEmailJob
 
 let bullAdapters: BullAdapter[] = []
 export let serverAdapter: ExpressAdapter

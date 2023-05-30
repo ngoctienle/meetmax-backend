@@ -23,11 +23,11 @@ withCredentials: true
 
 {
     "username": "ngtien",
-    "password": "123123"
+    "password": "111111"
 }
 
 ###SIGN OUT
-GET {{baseUrl}}/{{urlPath}}/signout
+POST {{baseUrl}}/{{urlPath}}/signout
 Content-Type: application/json
 Accept: application/json
 withCredentials: true
@@ -45,11 +45,11 @@ Accept: application/json
 withCredentials: true
 
 {
-    "email": "ngoctienle.2399@gmail.com"
+    "email": "ngtien@test.com"
 }
 
 ###RESET PASSWORD
-POST {{baseUrl}}/{{urlPath}}/reset-password
+POST {{baseUrl}}/{{urlPath}}/reset-password/998b26ac14dba6aceccafd21bf0cbfc82c277c9a
 Content-Type: application/json
 Accept: application/json
 withCredentials: true
