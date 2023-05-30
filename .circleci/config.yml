@@ -164,7 +164,7 @@ jobs:
       - run:
           name: Terraform Validate & Format
           command: |
-            cd development/
+            cd aws/
             terraform init -backend=false
             terraform validate
             terraform fmt
