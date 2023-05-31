@@ -49,13 +49,13 @@ variable "https_ssl_policy" {
 variable "main_api_server_domain" {
   description = "Main API Server Domain"
   type        = string
-  default     = "meatmax.social"
+  default     = "meetmax.social"
 }
 
 variable "dev_api_server_domain" {
   description = "Dev API Server Domain"
   type        = string
-  default     = "api.meatmax.social"
+  default     = "api.meetmax.social"
 }
 
 variable "ec2_iam_role_name" {

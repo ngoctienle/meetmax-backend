@@ -55,7 +55,7 @@ export class MailTransport {
 
   private async productionEmailSender(receiverEmail: string, subject: string, body: string): Promise<void> {
     const mailOptions: IMailOptions = {
-      from: environment.SENDER_EMAIL!,
+      from: environment.SENDGRID_SENDER!,
       to: receiverEmail,
       subject,
       html: body
