@@ -1,8 +1,10 @@
+version: 2.1
+
 orbs:
   codecov: codecov/codecov@3.2.4
   aws-cli: circleci/aws-cli@3.1.5
   slack: circleci/slack@4.12.5
-version: 2.1
+
 executors:
   app-executor:
     docker:
@@ -10,9 +12,11 @@ executors:
       - image: cimg/redis:7.0.2
       - image: 'cibuilds/base:latest'
     working_directory: ~/repo
+
   terraform-executor:
     docker:
       - image: hashicorp/terraform:latest
+
   slack-executor:
     docker:
       - image: 'cibuilds/base:latest'
@@ -23,20 +27,24 @@ aliases:
     run:
       name: Show Current Branch
       command: echo ${CIRCLE_BRANCH}
+
   - &restore-cache
     restore_cache:
       keys:
         - app-{{ checksum "package.json" }}
         - app-
+
   - &install-dependencies
     run:
       name: Install Dependencies
       command: yarn install
+
   - &save-cache
     save_cache:
       paths:
         - node_modules
       key: app-{{ checksum "package.json" }}
+
   - &zip-project
     run:
       name: Zip Project
@@ -44,6 +52,7 @@ aliases:
         rm -rf node_modules
         zip meetmaxapp.zip -r .
         echo "Zip Successful"
+
   - &notify-on-fail
     slack/notify:
       event: fail
@@ -176,7 +185,7 @@ jobs:
       - checkout
       - *show-current-branch-name
       - aws-cli/setup:
-          profile-name: default
+          version: 2.2.0
       - run:
           name: Terraform Plan
           command: |
@@ -197,7 +206,7 @@ jobs:
     steps:
       - checkout
       - aws-cli/setup:
-          profile-name: default
+          version: 2.2.0
       - *zip-project
       - run:
           name: Upload Project To S3
@@ -210,19 +219,18 @@ jobs:
     steps:
       - checkout
       - aws-cli/setup:
-          profile-name: default
+          version: 2.2.0
       - run:
           name: Deploy Changes with AWS CodeDeploy
           command: |
-            if ["${CODE_DEPLOY_UPDATE}" == "true"]
-            then
+            if [ "${CODE_DEPLOY_UPDATE}" == "true" ]; then
               aws deploy create-deployment \
-                    --region ap-southeast-1 \
-                    --application-name meetmax-api-${CIRCLE_BRANCH}-app \
-                    --deployment-config-name CodeDeployDefault.AllAtOnce \
-                    --deployment-group-name meetmax-api-${CIRCLE_BRANCH}-group \
-                    --file-exists-behavior "OVERWRITE" \
-                    --s3-location bucket=meetmax-api-${CIRCLE_BRANCH}-app,bundleType=zip,key=meetmaxapp.zip
+                --region ap-southeast-1 \
+                --application-name meetmax-api-${CIRCLE_BRANCH}-app \
+                --deployment-config-name CodeDeployDefault.AllAtOnce \
+                --deployment-group-name meetmax-api-${CIRCLE_BRANCH}-group \
+                --file-exists-behavior "OVERWRITE" \
+                --s3-location bucket=meetmax-api-${CIRCLE_BRANCH}-app,bundleType=zip,key=meetmaxapp.zip
             fi
       - *notify-on-fail
 
