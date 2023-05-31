@@ -184,8 +184,12 @@ jobs:
     steps:
       - checkout
       - *show-current-branch-name
+      - aws-cli/configure:
+          aws-access-key-id: $AWS_ACCESS_KEY_ID
+          aws-secret-access-key: $AWS_SECRET_ACCESS_KEY
+          aws-default-region: $AWS_REGION
       - aws-cli/setup:
-          version: 2.2.0
+          profile-name: default
       - run:
           name: Terraform Plan
           command: |
@@ -206,7 +210,7 @@ jobs:
     steps:
       - checkout
       - aws-cli/setup:
-          version: 2.2.0
+          profile-name: default
       - *zip-project
       - run:
           name: Upload Project To S3
@@ -219,7 +223,7 @@ jobs:
     steps:
       - checkout
       - aws-cli/setup:
-          version: 2.2.0
+          profile-name: default
       - run:
           name: Deploy Changes with AWS CodeDeploy
           command: |
