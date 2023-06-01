@@ -44,7 +44,7 @@ export class MeetMaxServer {
         keys: [environment.SECRET_KEY_ONE!, environment.SECRET_KEY_TWO!],
         maxAge: 24 * 60 * 60 * 1000, // 24 hours
         secure: environment.NODE_ENV !== 'development',
-        sameSite: environment.NODE_ENV === 'production' ? 'none' : false
+        sameSite: 'none'
       })
     )
     app.use(helmet())
