@@ -8,8 +8,10 @@ import { environment } from '@root/environment'
 
 import { IAuthJob } from '@authFeatures/interfaces/auth.interface'
 import { IEmailJob, IUserJob } from '@userFeatures/interfaces/user.interface'
+import { IPostJobData } from '@postFeatures/interfaces/post.interface'
+import { IFileImageJobData } from '@imageFeatures/interfaces/image.interface'
 
-type IBaseJobData = IAuthJob | IUserJob | IEmailJob
+type IBaseJobData = IAuthJob | IUserJob | IEmailJob | IPostJobData | IFileImageJobData
 
 let bullAdapters: BullAdapter[] = []
 export let serverAdapter: ExpressAdapter

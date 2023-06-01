@@ -16,6 +16,7 @@ import http from 'http'
 import appRoutes from '@root/setupRoutes'
 import { environment } from '@root/environment'
 import { IErrorResponse, CustomError } from '@global/helpers/error-handler'
+import { SocketIOPostHandler } from '@socket/post'
 
 const SERVER_PORT = 12313
 const log: Logger = environment.createLogger('server')
@@ -117,7 +118,9 @@ export class MeetMaxServer {
     })
   }
 
-  private socketIOConnection(io: Server): void {}
+  private socketIOConnection(io: Server): void {
+    const postSocketHandler: SocketIOPostHandler = new SocketIOPostHandler(io)
+  }
 
   private async startServer(app: Application): Promise<void> {
     if (!environment.JWT_TOKEN) {
