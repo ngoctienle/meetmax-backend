@@ -1,4 +1,4 @@
-@baseUrl = http://localhost:12313
+@baseUrl = https://api.meetmax.social
 @urlPath = api/v1
 
 ###SIGN UP
