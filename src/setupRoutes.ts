@@ -8,6 +8,8 @@ import { authRoutes } from '@authFeatures/routes/authRoutes'
 import { currentUserRoutes } from '@authFeatures/routes/currentRoutes'
 import { healthRoutes } from '@userFeatures/routes/healthRoutes'
 import { postRoutes } from '@postFeatures/routes/postRoutes'
+import { commentRoutes } from '@commentFeatures/routes/commentRoutes'
+import { reactionRoutes } from '@reactionFeatures/routes/reactionRoutes'
 
 const BASE_PATH = '/api/v1'
 
@@ -25,6 +27,8 @@ export default (app: Application): void => {
 
     /* Post Routes */
     app.use(BASE_PATH, authMiddleware.verifyUser, postRoutes.routes())
+    app.use(BASE_PATH, authMiddleware.verifyUser, commentRoutes.routes())
+    app.use(BASE_PATH, authMiddleware.verifyUser, reactionRoutes.routes())
   }
 
   routes()

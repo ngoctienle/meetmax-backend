@@ -16,7 +16,9 @@ import http from 'http'
 import appRoutes from '@root/setupRoutes'
 import { environment } from '@root/environment'
 import { IErrorResponse, CustomError } from '@global/helpers/error-handler'
+
 import { SocketIOPostHandler } from '@socket/post'
+import { SocketIONotificationHandler } from '@socket/notification'
 
 const SERVER_PORT = 12313
 const log: Logger = environment.createLogger('server')
@@ -120,6 +122,10 @@ export class MeetMaxServer {
 
   private socketIOConnection(io: Server): void {
     const postSocketHandler: SocketIOPostHandler = new SocketIOPostHandler(io)
+    const notificationSocketHandler: SocketIONotificationHandler = new SocketIONotificationHandler()
+
+    postSocketHandler.listen()
+    notificationSocketHandler.listen(io)
   }
 
   private async startServer(app: Application): Promise<void> {

@@ -10,8 +10,10 @@ import { IAuthJob } from '@authFeatures/interfaces/auth.interface'
 import { IEmailJob, IUserJob } from '@userFeatures/interfaces/user.interface'
 import { IPostJobData } from '@postFeatures/interfaces/post.interface'
 import { IFileImageJobData } from '@imageFeatures/interfaces/image.interface'
+import { ICommentJob } from '@commentFeatures/interfaces/comment.interface'
+import { IReactionJob } from '@reactionFeatures/interfaces/reaction.interface'
 
-type IBaseJobData = IAuthJob | IUserJob | IEmailJob | IPostJobData | IFileImageJobData
+type IBaseJobData = IAuthJob | IUserJob | IEmailJob | IPostJobData | IFileImageJobData | ICommentJob | IReactionJob
 
 let bullAdapters: BullAdapter[] = []
 export let serverAdapter: ExpressAdapter
