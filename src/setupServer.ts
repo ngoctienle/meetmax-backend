@@ -20,7 +20,7 @@ import { IErrorResponse, CustomError } from '@global/helpers/error-handler'
 import { SocketIOPostHandler } from '@socket/post'
 import { SocketIONotificationHandler } from '@socket/notification'
 
-const SERVER_PORT = 12313
+const SERVER_PORT = 1203
 const log: Logger = environment.createLogger('server')
 
 export class MeetMaxServer {

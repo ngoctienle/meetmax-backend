@@ -1,7 +1,7 @@
 resource "aws_alb_target_group" "server_backend_tg" {
   name                 = "${local.prefix}-tg"
   vpc_id               = aws_vpc.main.id
-  port                 = 12313 # API server port
+  port                 = 1203 # API server port
   protocol             = "HTTP"
   deregistration_delay = 60
 
